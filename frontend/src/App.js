@@ -10,7 +10,7 @@ function App() {
     const userMsg = { sender: 'user', text: input };
     setMessages([...messages, userMsg]);
 
-    const res = await axios.post('http://localhost:5000/chat', {
+    const res = await axios.post('http://15.206.35.255:5000/chat', {
       message: input,
     });
 
