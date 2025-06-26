@@ -14,7 +14,7 @@ pipeline {
     stage('Checkout') {
       steps {
         echo 'Cloning repository...'
-        git 'https://your-git-repo-url.git'
+        git 'https://github.com/shantarammali/chat-boat.git'
       }
     }
 
