@@ -20,7 +20,7 @@ pipeline {
 
     stage('Install Backend Dependencies') {
       steps {
-        dir('server') {
+        dir('backend')  {
           echo 'Installing backend dependencies...'
           sh 'npm install'
         }
@@ -29,7 +29,7 @@ pipeline {
 
     stage('Run Backend Tests') {
       steps {
-        dir('server') {
+        dir('backend') {
           echo 'Running backend tests...'
           sh 'npm test || true' // Use '|| true' to allow the pipeline to continue even if tests fail
         }
@@ -38,7 +38,7 @@ pipeline {
 
     stage('Install Frontend Dependencies') {
       steps {
-        dir('client') {
+        dir('frontend') {
           echo 'Installing frontend dependencies...'
           sh 'npm install'
         }
@@ -47,7 +47,7 @@ pipeline {
 
     stage('Run Frontend Tests') {
       steps {
-        dir('client') {
+        dir('frontend') {
           echo 'Running frontend tests...'
           sh 'npm test -- --watchAll=false || true' // Use '--watchAll=false' to run tests once and '|| true' to allow the pipeline to continue even if tests fail
         }
@@ -56,7 +56,7 @@ pipeline {
 
     stage('Build Frontend') {
       steps {
-        dir('client') {
+        dir('frontend') {
           echo 'Building React frontend...'
           sh 'npm run build'
         }
