@@ -74,9 +74,6 @@ cd chat-boat/backend || exit 1
 git pull origin main
 pm2 restart server || pm2 start server.js --name server
 EOF
-
-# Copy built frontend to EC2 (adjust path if needed)
-scp -r frontend/build/* ec2-user@15.206.35.255:/var/www/html/
 '''
         }
       }
