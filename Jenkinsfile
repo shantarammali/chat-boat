@@ -67,10 +67,10 @@ pipeline {
         steps {
           sshagent(['ec2-ssh-key']) {
             sh '''
-              ssh -o StrictHostKeyChecking=no ec2-user@15.206.35.255 << EOF
-                cd /home/ec2-user/backend
+              ssh -o StrictHostKeyChecking=no ec2-user@15.206.35.255 << 'EOF'
+                cd /home/ec2-user/chat-boat/backend || exit 1
                 git pull origin main
-                pm2 restart server.js
+                pm2 restart server || pm2 start server.js --name server
               EOF
               '''
             echo 'Deployment to EC2 instance completed successfully!'
