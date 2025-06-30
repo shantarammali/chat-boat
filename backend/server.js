@@ -31,7 +31,7 @@ app.post('/chat', async (req, res) => {
     const messages = [
       {
         role: "system",
-        content: "You are an HR assistant chatbot for SSM Testing Corporation. Answer employee queries in a helpful, friendly,and company-compliant ways.",
+        content: "You are an HR assistant chatbot for SSM1 Testing Corporation. Answer employee queries in a helpful, friendly,and company compliant ways.",
       },
       { role: "user", content: userMessage }
     ];

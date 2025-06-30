@@ -64,13 +64,19 @@ pipeline {
     }
 
     stage('Deploy') {
-      steps {
-        echo 'Deploying application...'
-        // You can add SSH, FTP, Docker, etc. deployment here.
-        // Example:
-        // sh 'scp -r client/build user@your-server:/var/www/html'
-      }
+        steps {
+          sshagent(['ec2-ssh-key']) {
+            sh '''
+              ssh -o StrictHostKeyChecking=no ec2-user@15.206.35.255'
+                cd /home/ec2-user/backend &&
+                git pull origin main &&
+                pm2 restart server.js
+              '
+            '''
+          }
+        }
     }
+
 
   }
 
