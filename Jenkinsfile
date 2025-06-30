@@ -65,7 +65,7 @@ pipeline {
 
     stage('Deploy') {
   steps {
-    sshagent(['ec2-user']) {
+    sshagent(['ec2-ssh-key']) {
       sh '''
         ssh -o StrictHostKeyChecking=no ec2-user@15.206.35.255 << 'EOF'
           cd chat-boat/backend || exit 1
