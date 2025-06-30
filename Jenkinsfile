@@ -66,16 +66,17 @@ pipeline {
     stage('Deploy') {
   steps {
     sshagent(['ec2-ssh-key']) {
-      sh '''
-        ssh -o StrictHostKeyChecking=no ec2-user@15.206.35.255 << 'EOF'
-          cd chat-boat/backend || exit 1
-          git pull origin main
-          pm2 restart server || pm2 start server.js --name server
-        EOF
-      '''
+      sh '''#!/bin/bash
+ssh -o StrictHostKeyChecking=no ec2-user@15.206.35.255 <<EOF
+cd chat-boat/backend || exit 1
+git pull origin main
+pm2 restart server || pm2 start server.js --name server
+EOF
+'''
     }
   }
 }
+
 
   }
 
