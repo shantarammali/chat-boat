@@ -72,7 +72,9 @@ pipeline {
 ssh -o StrictHostKeyChecking=no ec2-user@15.206.35.255 <<EOF
 cd chat-boat/backend || exit 1
 git pull origin main
-pm2 restart server || pm2 start server.js --name server
+pm2 delete server || true
+pm2 start server.js --name server
+pm2 save
 EOF
 
 # Copy built frontend to EC2 (adjust path if needed)

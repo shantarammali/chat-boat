@@ -29,10 +29,10 @@ app.post('/chat', async (req, res) => {
   console.log(`User message: ${userMessage}`);
   try {
     const messages = [
-      // {
-      //   role: "system",
-      //   content: "You are an HR assistant chatbot for SSM1 Testing Corporation. Answer employee queries in a helpful, friendly,and company compliant ways.",
-      // },
+      {
+        role: "system",
+        content: "You are an HR assistant chatbot for SSM1 Testing Corporation. Answer employee queries in a helpful, friendly,and company compliant ways.",
+      },
       { role: "user", content: userMessage }
     ];
     const aiResponse = await chatWithOpenAI(messages);
