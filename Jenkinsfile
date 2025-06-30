@@ -57,6 +57,7 @@ pipeline {
       steps {
         dir('frontend') {
           echo 'Building React frontend...'
+          sh 'npm install'
           sh 'npm run build'
         }
       }

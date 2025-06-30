@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h2>Testing Chatbot 🤖</h2>
+      <h2>Testing Chatbot new 🤖</h2>
       <div style={{ height: '300px', border: '1px solid #ccc', overflowY: 'scroll', padding: '10px' }}>
         {messages.map((msg, index) => (
           <div key={index} style={{ textAlign: msg.sender === 'user' ? 'right' : 'left' }}>
