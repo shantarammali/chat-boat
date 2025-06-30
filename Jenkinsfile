@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    NODE_VERSION = '22.18.0' // Specify the Node.js version you want to use
+    NODE_VERSION = '22.18.0'
   }
 
   tools {
@@ -10,7 +10,6 @@ pipeline {
   }
 
   stages {
-
     stage('Checkout') {
       steps {
         echo 'Cloning repository...'
@@ -31,7 +30,7 @@ pipeline {
       steps {
         dir('backend') {
           echo 'Running backend tests...'
-          sh 'npm test || true' // Use '|| true' to allow the pipeline to continue even if tests fail
+          sh 'npm test || true'
         }
       }
     }
@@ -49,7 +48,7 @@ pipeline {
       steps {
         dir('frontend') {
           echo 'Running frontend tests...'
-          sh 'npm test -- --watchAll=false || true' // Use '--watchAll=false' to run tests once and '|| true' to allow the pipeline to continue even if tests fail
+          sh 'npm test -- --watchAll=false || true'
         }
       }
     }
@@ -63,21 +62,24 @@ pipeline {
       }
     }
 
-    stage('Deploy') {
-  steps {
-    sshagent(['ec2-ssh-key']) {
-      sh '''#!/bin/bash
+    stage('Deploy Backend and Frontend') {
+      steps {
+        sshagent(['ec2-ssh-key']) {
+          sh '''#!/bin/bash
+
+# Deploy backend and restart server
 ssh -o StrictHostKeyChecking=no ec2-user@15.206.35.255 <<EOF
 cd chat-boat/backend || exit 1
 git pull origin main
 pm2 restart server || pm2 start server.js --name server
 EOF
+
+# Copy built frontend to EC2 (adjust path if needed)
+scp -r frontend/build/* ec2-user@15.206.35.255:/var/www/html/
 '''
+        }
+      }
     }
-  }
-}
-
-
   }
 
   post {
