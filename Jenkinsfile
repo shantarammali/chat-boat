@@ -75,7 +75,6 @@ pipeline {
               '''
             }
             echo 'Deployment to EC2 instance completed successfully!'
-          }
         }
     }
 
